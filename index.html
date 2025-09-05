@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>日记</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Serif SC', serif;
+      background: #0d1117;
+      color: #e6edf3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #161b22;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 800px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      position: relative;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    .byline, .meta {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #9da5b4;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #9da5b4;
+    }
+    .extra-line {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #9da5b4;
+    }
+    .poem {
+      margin: 3rem 0;
+      padding: 2rem;
+      line-height: 2;
+      white-space: pre-wrap;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 15px;
+    }
+    .chapter-1 { 
+      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.06) 40%, rgba(245, 158, 11, 0.02) 80%, transparent 100%);
+      padding: 2.5rem 3rem;
+      border-radius: 25px;
+      margin: 3rem -1rem;
+      display: block;
+    }
+    .chapter-2 { 
+      background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.06) 40%, rgba(16, 185, 129, 0.02) 80%, transparent 100%);
+      padding: 2.5rem 3rem;
+      border-radius: 25px;
+      margin: 3rem -1rem;
+      display: block;
+    }
+    .chapter-3 { 
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.06) 40%, rgba(59, 130, 246, 0.02) 80%, transparent 100%);
+      padding: 2.5rem 3rem;
+      border-radius: 25px;
+      margin: 3rem -1rem;
+      display: block;
+    }
+    .toggle-btn {
+      position: absolute;
+      right: 2rem;
+      top: 2rem;
+      background: #0ea5e9;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <button class="toggle-btn" onclick="toggleLang()">中文 / EN</button>
+    <h1 id="title">日记</h1>
+    <div class="byline" id="byline">作者 clayderman loh</div>
+    <div class="byline" id="id-line">id: 0001</div>
+    <div class="meta">
+      <span id="date">发布于：</span> • <span id="readtime"></span>
+    </div>
+
+    <!-- poem content -->
+    <div id="poem" class="poem"></div>
+
+    <div class="meta" id="views" style="margin-bottom: 1rem;">👁️ 0 views</div>
+
+    <div class="footer" id="footer">© clayderman 2025 版权所有</div>
+    <div class="extra-line" id="extra-line">@claygiraf</div>
+  </div>
+
+  <script>
+    const POEM_TEXT = `[一]
+悠悠挥笔页页字 柔柔光束透穹顶
+十层环绕📕香架 十字叠盒真鲁班
+独上飞机老紧张 首踏长水更紧张
+久坐长腿酸呱叫 转机贼远坐最久
+暑假脱离老尘世 每日米线情不断
+暑假闲人找课上 幸福路上冷气爽
+深夜勇闯小电驴 七彩繁华易迷路
+岸边渔村人🏔️海 六寺八庙眼花乱
+妙湛两塔冬夜动 笔写苍穹非鬼门
+奇🌸异草遇孔雀 一日看尽天下景
+世博花开新世纪 参观多肉不外套
+七星宝剑威严酷 金光璀璨最大殿
+殿宇红映茶花红 鸣风🌸香扑鼻来
+
+注释
+鲁班：鲁班奖
+小电驴：电动自行车
+渔村：官渡古镇
+多肉：仙人掌
+最大殿：太和金殿，中国最大铜铸殿
+花：茶花
+鸣风：鸣凤山
+
+[二]
+无边落木萧萧下 鸥群西来过冬客
+城中美玉翠湖园 鹅君陪酒慢生活
+徐徐杨柳粉荷开 喜见将领讲武堂 
+首坐高铁如银🐲 快稳大位好充🔋
+窗外朦胧🌧雾美 穿梭前进高海拔 
+行李出站寒风袭 人间最近天堂美
+秘境依山松林寺 金顶辉煌释迦佛
+藏佛合一信仰力 民族和谐寻桃源
+家家流水无墙城 无墙环绕困灵魂
+户户垂杨纳西魂 茶🐴古道花石路
+雪山无雪细雨伴 毅力对抗心跳快
+登顶奖牌无人及 首🏔️爬记永不忘
+索道抢来真不易 🐑草遍地舍得归？
+
+注释
+鸥：红嘴鸥
+荷：荷花
+松林寺：噶丹松赞林寺
+桃源：世外桃源
+纳西：纳西族
+
+[三]
+晶晶晨露篱上🌸 亚洲最大花市呼
+鲜花买卖主导力 花卉价格风向标
+巧遇稀珍六角鱼 可爱宝宝娘在哪？
+保护生态少灾难 保护宝宝少污染
+远见西山睡美人 滇池畔卧青丝女
+滇中绝境🐲门窟 一登百倍高身价
+太🌞热情不忘伞 期盼目睹华亭寺
+嘉华开心生意旺 一人一手鲜花饼
+时光匆匆二十五 结业犹如第一天
+课堂知识无国界 四国交流开眼界
+曾经经济傲世界 窗外不见路人行
+如今环境永生命 井底青🐸蹲雨天
+偶然相逢一堂课 骑骑电车有米线？
+偶然相逢一晚上 看看二楼有晚饭？
+偶然相遇一夏天 想想何时再相见
+
+注释
+最大花市: 斗南花市
+六角龙: 六角恐龙鱼
+龙门窟: 龙门石窟
+`;
+    const LANG = {
+      en: {
+        title: "Diary",
+        byline: "by clayderman loh",
+        published: "Published:",
+        readtime: "~ {min} min read",
+        footer: "© clayderman 2025 All rights reserved."
+      },
+      zh: {
+        title: "日记",
+        byline: "作者 clayderman loh",
+        published: "发布于：",
+        readtime: "约 {min} 分钟阅读",
+        footer: "© clayderman 2025 版权所有"
+      }
+    };
+
+    let currentLang = "zh";
+    let viewCount = 0;
+    const minutes = Math.ceil(POEM_TEXT.length / 150);
+    const now = new Date();
+
+    function $(id){ return document.querySelector(id); }
+
+    function renderLang(){
+      const dict = LANG[currentLang];
+      $("#title").textContent = dict.title;
+      $("#byline").textContent = dict.byline;
+      $("#date").innerHTML = dict.published + " " + now.toLocaleDateString();
+      $("#readtime").innerHTML = dict.readtime.replace('{min}', minutes);
+      $("#footer").textContent = dict.footer;
+      
+      // Apply colors to each chapter
+      let poemContent = POEM_TEXT;
+      poemContent = poemContent.replace(/(\[一\][\s\S]*?)(?=\[二\]|$)/g, '<span class="chapter-1">$1</span>');
+      poemContent = poemContent.replace(/(\[二\][\s\S]*?)(?=\[三\]|$)/g, '<span class="chapter-2">$1</span>');
+      poemContent = poemContent.replace(/(\[三\][\s\S]*?)$/g, '<span class="chapter-3">$1</span>');
+      
+      $("#poem").innerHTML = poemContent.replace(/\n/g,"<br>");
+    }
+
+    function toggleLang(){
+      currentLang = currentLang === "zh" ? "en" : "zh";
+      renderLang();
+    }
+
+    function initViewCounter() {
+      $("#views").textContent = `👁️ ${viewCount} views`;
+    }
+
+    function updateViewCount() {
+      viewCount++;
+      $("#views").textContent = `👁️ ${viewCount} views`;
+    }
+
+    // Initialize
+    initViewCounter();
+    renderLang();
+
+  // Increase only once when page loads
+window.addEventListener('load', () => {
+  updateViewCount();
+});
+
+  </script>
+</body>
+</html>
