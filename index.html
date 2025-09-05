@@ -11,103 +11,217 @@
       color: #e6edf3;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
       margin: 0;
-    }
-    .card {
-      background: #161b22;
-      padding: 2rem;
-      border-radius: 20px;
-      max-width: 800px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      overflow-x: hidden;
+      padding: 2rem 0;
       position: relative;
     }
+
+    /* Reflective subtle lighting effect */
+   body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 20%) 0 0/50px 50px,
+    radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 20%) 25px 25px/50px 50px,
+    linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02));
+  animation: moveLights 220s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes moveLights {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(20px, -20px) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+    .card {
+     background: #161b22;
+  padding: 2rem 2rem 1rem 2rem; /* top & sides padding, bottom just enough for spacing */
+  border-radius: 20px;
+  max-width: 800px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
     h1 {
       font-family: 'Playfair Display', serif;
       text-align: center;
       font-size: 2.5rem;
       margin: 0;
     }
+
     .byline, .meta {
       text-align: center;
       font-size: 0.9rem;
       margin-top: 0.5rem;
       color: #9da5b4;
     }
+
     .footer {
       text-align: center;
       font-size: 0.9rem;
       margin-top: 0.5rem;
       color: #9da5b4;
     }
+
     .extra-line {
       text-align: center;
       font-size: 0.9rem;
       margin-top: 0.5rem;
-      color: #9da5b4;
+      color: #0ea5e9;
     }
+    .extra-line a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .extra-line a:hover {
+      text-decoration: underline;
+    }
+
+    .ai-box {
+      background: rgba(250, 204, 21, 0.1);
+      border-left: 3px solid #facc15;
+      color: #facc15;
+      padding: 0.8rem 1rem; /* remove bottom padding if any */
+      border-radius: 8px;
+      text-align: center;
+      font-style: italic;
+      margin: 1.5rem 0 0 0; /* top margin only */
+    }
+
+    .footer, .extra-line, #views {
+  margin: 0; /* remove all margins */
+  padding: 0; /* remove all padding */
+  text-align: center;
+}
+
     .poem {
-      margin: 3rem 0;
-      padding: 2rem;
-      line-height: 2;
-      white-space: pre-wrap;
-      font-size: 1.1rem;
-      background: rgba(255,255,255,0.02);
-      border-radius: 15px;
-    }
-    .chapter-1 { 
-      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.06) 40%, rgba(245, 158, 11, 0.02) 80%, transparent 100%);
-      padding: 2.5rem 3rem;
-      border-radius: 25px;
-      margin: 3rem -1rem;
+  margin: 0;
+  padding: 2rem 2rem 0 2rem; /* bottom = 0 */
+  line-height: 2;
+  white-space: pre-wrap;
+  font-size: 1.1rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 15px;
+}
+
+#views, .footer, .extra-line {
+  margin: 0.5rem 0; /* uniform vertical spacing */
+  padding: 0;
+  text-align: center;
+}
+
+.ai-box {
+  margin: 1rem 0 0 0; /* top margin only */
+  padding: 0.8rem 1rem; /* bottom padding = 0 */
+}
+
+.chapter-1 { 
+  background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.06) 40%, rgba(245, 158, 11, 0.02) 80%, transparent 100%);
+  padding: 2.5rem 3rem;
+  border-radius: 25px;
+  margin: 2rem -1rem 0 -1rem;
       display: block;
     }
     .chapter-2 { 
       background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.06) 40%, rgba(16, 185, 129, 0.02) 80%, transparent 100%);
       padding: 2.5rem 3rem;
       border-radius: 25px;
-      margin: 3rem -1rem;
+      margin: 2rem -1rem 0 -1rem;
       display: block;
     }
     .chapter-3 { 
       background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.06) 40%, rgba(59, 130, 246, 0.02) 80%, transparent 100%);
       padding: 2.5rem 3rem;
       border-radius: 25px;
-      margin: 3rem -1rem;
+      margin: 2rem -1rem 0 -1rem;
       display: block;
     }
+
     .toggle-btn {
       position: absolute;
-      right: 2rem;
       top: 2rem;
+      right: 2rem;
       background: #0ea5e9;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 9999px;
       font-weight: bold;
       cursor: pointer;
+      z-index: 2;
+    }
+
+    .scroll-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0ea5e9;
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 50%;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(14,165,233,0.5);
+      transition: transform 0.2s;
+    }
+
+    .scroll-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* View icon instead of emoji */
+    .view-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+
     }
   </style>
 </head>
 <body>
   <div class="card">
     <button class="toggle-btn" onclick="toggleLang()">中文 / EN</button>
+
     <h1 id="title">日记</h1>
-    <div class="byline" id="byline">作者 clayderman loh</div>
+    <div class="byline" id="byline">作者 罗德盛</div>
     <div class="byline" id="id-line">id: 0001</div>
     <div class="meta">
       <span id="date">发布于：</span> • <span id="readtime"></span>
     </div>
 
+    <!-- AI notice box -->
+    <div id="ai-notice" class="ai-box"></div>
+
     <!-- poem content -->
     <div id="poem" class="poem"></div>
 
-    <div class="meta" id="views" style="margin-bottom: 1rem;">👁️ 0 views</div>
+    <div class="meta" id="views" style="margin-bottom:0.5rem;">
+      <svg class="view-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 5c-7.633 0-12 6.999-12 7s4.367 7 12 7 12-6.999 12-7-4.367-7-12-7zm0 12c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/>
+      </svg>
+      <span id="view-count">0 views</span>
+    </div>
 
     <div class="footer" id="footer">© clayderman 2025 版权所有</div>
-    <div class="extra-line" id="extra-line">@claygiraf</div>
+    <div class="extra-line" id="extra-line"><a href="https://www.instagram.com/claygiraf" target="_blank">@claygiraf</a></div>
   </div>
+
+  <!-- Scroll button bottom-right -->
+  <button class="scroll-btn" id="scroll-btn" onclick="scrollPage()">↓</button>
 
   <script>
     const POEM_TEXT = `[一]
@@ -176,22 +290,24 @@
 注释
 最大花市: 斗南花市
 六角龙: 六角恐龙鱼
-龙门窟: 龙门石窟
-`;
+龙门窟: 龙门石窟`;
+
     const LANG = {
       en: {
         title: "Diary",
         byline: "by clayderman loh",
         published: "Published:",
         readtime: "~ {min} min read",
-        footer: "© clayderman 2025 All rights reserved."
+        footer: "© clayderman 2025 All rights reserved.",
+        aiNotice: "AI translation coming soon"
       },
       zh: {
         title: "日记",
         byline: "作者 clayderman loh",
         published: "发布于：",
         readtime: "约 {min} 分钟阅读",
-        footer: "© clayderman 2025 版权所有"
+        footer: "© clayderman 2025 版权所有",
+        aiNotice: ""
       }
     };
 
@@ -199,6 +315,7 @@
     let viewCount = 0;
     const minutes = Math.ceil(POEM_TEXT.length / 150);
     const now = new Date();
+    let scrollAtBottom = true; // toggle scroll direction
 
     function $(id){ return document.querySelector(id); }
 
@@ -209,7 +326,15 @@
       $("#date").innerHTML = dict.published + " " + now.toLocaleDateString();
       $("#readtime").innerHTML = dict.readtime.replace('{min}', minutes);
       $("#footer").textContent = dict.footer;
-      
+
+      // Show AI box only in English
+      if(currentLang === 'en'){
+        $("#ai-notice").textContent = dict.aiNotice;
+        $("#ai-notice").style.display = 'block';
+      } else {
+        $("#ai-notice").style.display = 'none';
+      }
+
       // Apply colors to each chapter
       let poemContent = POEM_TEXT;
       poemContent = poemContent.replace(/(\[一\][\s\S]*?)(?=\[二\]|$)/g, '<span class="chapter-1">$1</span>');
@@ -225,23 +350,30 @@
     }
 
     function initViewCounter() {
-      $("#views").textContent = `👁️ ${viewCount} views`;
+      $("#view-count").textContent = viewCount + ' views';
     }
 
     function updateViewCount() {
       viewCount++;
-      $("#views").textContent = `👁️ ${viewCount} views`;
+      $("#view-count").textContent = viewCount + ' views';
+    }
+
+    function scrollPage() {
+      if(scrollAtBottom){
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        scrollAtBottom = false;
+        $("#scroll-btn").textContent = '↑';
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollAtBottom = true;
+        $("#scroll-btn").textContent = '↓';
+      }
     }
 
     // Initialize
     initViewCounter();
     renderLang();
-
-  // Increase only once when page loads
-window.addEventListener('load', () => {
-  updateViewCount();
-});
-
+    window.addEventListener('load', () => { updateViewCount(); });
   </script>
 </body>
 </html>
