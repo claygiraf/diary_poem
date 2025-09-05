@@ -2,4 +2,4 @@
 diary poem reader
 
 click here to read
->>https://claygiraf.github.io/diary_poem/<<
+>> https://claygiraf.github.io/diary_poem/ <<
